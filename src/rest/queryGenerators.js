@@ -42,7 +42,7 @@ function collection(state, extraParams = {}) {
   if (perPage > 0) queryParams.per_page = perPage
   if (sort && sort.by) queryParams.sort = `${sort.dir ? '-' : ''}${snakeCase(sort.by)}`
   if (filters && filters.forEach) queryParams = { ...queryParams, ...parseFilters(filters) }
-  if (generalParams) queryParams = { ... queryParams, ...generalParams.toObject() }
+  if (generalParams) queryParams = { ...queryParams, ...generalParams.toObject() }
 
   return { ...queryParams, ...extraParams }
 }

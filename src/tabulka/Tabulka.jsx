@@ -30,7 +30,7 @@ export default class Tabulka extends React.Component {
 
   render() {
     const { fetching, items, uniqueField, pagination, sort, filters, onSortChange, onFilterChange, columns, setColumnVisibility, onRowCountChange } = this.props // eslint-disable-line max-len
-    let offset = (pagination.page - 1) * pagination.perPage + 1
+    let offset = ((pagination.page - 1) * pagination.perPage) + 1
 
     return (
       <div className={`myTable ${(fetching ? 'fetching' : '')}`}>

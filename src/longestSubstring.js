@@ -37,7 +37,7 @@ const tFind = function(str1, str2) {
 
         if (num[i][j] > maxLen) {
           maxLen = num[i][j]
-          thisSubsBegin = i - num[i][j] + 1
+          thisSubsBegin = (i - num[i][j]) + 1
           if (lastSubsBegin === thisSubsBegin) {
             // if the current LCS is the same as the last time this block ran
             sequence += str1[i]

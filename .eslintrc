@@ -1,0 +1,66 @@
+{
+    "parser": "babel-eslint",
+    "extends": "eslint-config-airbnb",
+    "plugins": [
+        "react",
+        "import"
+    ],
+    "env": {
+        "browser": true,
+        "node": true,
+        "mocha": true
+    },
+    "rules": {
+        "import/no-named-as-default": 1,
+        // Temporarirly disabled due to a possible bug in babel-eslint (todomvc example)
+        //    "block-scoped-var": 0,
+        // Temporarily disabled for test/* until babel/babel-eslint#33 is resolved
+        "padded-blocks": 0,
+        "comma-dangle": 0,
+        // not sure why airbnb turned this on. gross!
+        "no-console": 0,
+        "semi": 0,
+        "no-extra-semi": 1,
+        "new-cap": 0,
+        "space-before-function-paren": 0,
+        "one-var": 0,
+        "radix": 0,
+        "no-unused-vars": 1,
+        "quote-props": 0,
+        "max-len": [
+            1,
+            120,
+            4,
+            {
+                "ignoreComments": true
+            }
+        ],
+        "no-param-reassign": 0, // hhj from este framework: We love param reassignment. Naming is hard.
+        "no-shadow": 0, // Shadowing is a nice language feature. Naming is hard.
+        // Overide Stateless
+        "react/prefer-stateless-function": 0,
+        "func-names": 0, // hhj
+        "no-underscore-dangle": 0, // hhj
+        "global-require": 0,  // hhj
+        "import/no-extraneous-dependencies": 1, // hhj
+        "import/prefer-default-export": 1 // hhj
+    },
+    "settings": {
+        "import/parser": "babel-eslint",
+        "import/resolve": {
+            "moduleDirectory": [
+                "node_modules",
+                "src"
+            ]
+        }
+    },
+    "globals": {
+        "__DEVELOPMENT__": true,
+        "__CLIENT__": true,
+        "__SERVER__": true,
+        "__DISABLE_SSR__": true,
+        "__DEVTOOLS__": true,
+        "socket": true,
+        "webpackIsomorphicTools": true
+    }
+}

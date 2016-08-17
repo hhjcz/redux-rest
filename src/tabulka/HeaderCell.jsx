@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react'
 import HeaderFilter from './HeaderFilter'
 import HeaderSort from './HeaderSort'
-import './Header.styl'
+import '../../assets/Header.styl'
 
 export default class HeaderCell extends React.Component {
   static propTypes = {

@@ -1,7 +1,7 @@
 /** Created by hhj on 3/16/16. */
 import React, { PropTypes } from 'react'
 import FontIcon from 'material-ui/FontIcon'
-import '../icons.css'
+import '../../assets/icons.css'
 
 export default class MyIcon extends React.Component {
   static propTypes = {

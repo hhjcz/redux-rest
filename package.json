@@ -4,7 +4,11 @@
   "description": "HHj React reusable components and utils",
   "main": "index.js",
   "scripts": {
-    "install": "babel src --out-dir lib",
+    "build": "babel src --out-dir lib",
+    "postinstall": "npm run build && npm run less && npm run stylus && npm run sass",
+    "less": "lessc assets/*.less || true",
+    "stylus": "stylus assets/*.styl || true",
+    "sass": "node-sass assets/*.scss -o assets/ || true",
     "eslint": "eslint --ext=js --ext=jsx src || true",
     "test": "mocha --compilers js:babel-register --require ./test_helper.js --reporter spec --recursive --watch-extensions jsx 'src/**/*.spec.js'",
     "test:watch": "npm run test -- --watch --reporter min"
@@ -39,8 +43,10 @@
     "babel-runtime": "^6.11.6",
     "humps": "^1.1.0",
     "immutable": "^3.8.1",
+    "less": "^2.7.1",
     "lodash": "^4.15.0",
     "material-ui": "^0.15.4",
+    "node-sass": "^3.8.0",
     "query-string": "^4.2.3",
     "react": "^15.3.0",
     "react-autocomplete": "^1.2.1",
@@ -49,7 +55,9 @@
     "react-redux": "^4.4.5",
     "react-redux-toastr": "^3.6.0",
     "react-tap-event-plugin": "^1.0.0",
-    "redux": "^3.5.2"
+    "redux": "^3.5.2",
+    "rupture": "^0.6.1",
+    "stylus": "^0.54.5"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",

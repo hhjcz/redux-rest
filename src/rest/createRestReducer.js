@@ -2,8 +2,8 @@
 /* eslint-disable max-len */
 /* eslint-disable no-case-declarations */
 import { compose } from 'redux'
-import { Pagination, setPage, setPageSize } from '../../app/models/Pagination'
-import { Sort } from '../../app/models/Sort'
+import { Pagination, setPage, setPageSize } from '../Pagination'
+import { Sort } from '../Sort'
 import {
   InitialState,
   revive,

@@ -1,6 +1,6 @@
 {
   "name": "react-lib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "HHj React reusable components and utils",
   "main": "index.js",
   "scripts": {

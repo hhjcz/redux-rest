@@ -1,7 +1,7 @@
 /** Created by hhj on 12/28/15. */
 import React, { PropTypes } from 'react'
 import { List } from 'immutable'
-import './Tabulka.styl'
+import '../../assets/Tabulka.styl'
 import HeaderCell from './HeaderCell'
 import Radka from './Radka'
 import Footer from './Footer'

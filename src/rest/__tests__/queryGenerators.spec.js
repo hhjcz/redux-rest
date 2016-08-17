@@ -3,9 +3,9 @@ import { expect } from 'chai'
 import { Map } from 'immutable'
 import qs from 'query-string'
 import queryGenerators from '../queryGenerators'
-import { Filter } from '../../../app/models/Filter'
-import { Sort } from '../../../app/models/Sort'
-import { Pagination } from '../../../app/models/Pagination'
+import { Filter } from '../../Filter'
+import { Sort } from '../../Sort'
+import { Pagination } from '../../Pagination'
 
 describe('rest library queryGenerators', () => {
   const { fetchCollection: collectionGenerator, fetchOne: itemGenerator } = queryGenerators

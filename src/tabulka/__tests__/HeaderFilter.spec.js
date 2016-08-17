@@ -5,7 +5,7 @@ import sinon from 'sinon'
 import React from 'react'
 import sd from 'skin-deep'
 
-import { Filter } from '../../../app/models/Filter'
+import { Filter } from '../../Filter'
 import HeaderFilter from '../HeaderFilter'
 
 describe('lib tabulka HeaderFilter component', () => {

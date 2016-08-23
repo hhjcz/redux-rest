@@ -1,17 +1,17 @@
 {
   "name": "@hhjcz/react-lib",
-  "version": "1.0.8",
+  "version": "1.0.11",
   "description": "HHj React reusable components and utils",
   "main": "lib/rest/index.js",
   "private": false,
   "files": [
     "src",
-    "assets",
     "lib"
   ],
   "scripts": {
-    "build": "babel src --ignore spec.js,spec.jsx --out-dir lib",
-    "prepublish": "npm run build && npm run less && npm run stylus && npm run sass",
+    "build": "babel src --copy-files --ignore spec.js,spec.jsx --out-dir lib",
+    "prepublish": "npm run clean && npm run build",
+    "clean": "rm -fr lib/ || true",
     "less": "lessc assets/*.less || true",
     "stylus": "stylus assets/*.styl || true",
     "sass": "node-sass assets/*.scss -o assets/ || true",

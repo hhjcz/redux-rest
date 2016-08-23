@@ -1,6 +1,6 @@
 {
   "name": "@hhjcz/react-lib",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "HHj React reusable components and utils",
   "main": "lib/rest/index.js",
   "private": false,
@@ -75,7 +75,6 @@
     "nock": "^8.0.0",
     "node-sass": "^3.8.0",
     "react-addons-test-utils": "^15.3.0",
-    "rupture": "^0.6.1",
     "sinon": "^1.17.5",
     "sinon-chai": "^2.8.0",
     "skin-deep": "^0.16.0",

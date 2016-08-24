@@ -1,21 +1,19 @@
 .myTable {
-  position: relative;
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column;
   margin-top: 0.3em;
   opacity: 1;
 
   // .myTableRow
   &Row {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center;
     width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: stretch;
     border-bottom: 1px solid #ddd;
-    @media all and (max-width: 500px) {
+    @media all and (max-width: 768px) {
       flex-flow: column;
-      align-items: flex-start;
     }
 
     &:nth-of-type(even) {
@@ -34,8 +32,10 @@
     // .myTableRowItem
     &Item {
       display: flex;
-      flex: 1 0 0%;
+      flex: 1;
+      justify-content: flex-start;
       align-items: center;
+      min-height: 1em;
       padding: 0.2em;
       transition: all 0.2s ease-in;
 

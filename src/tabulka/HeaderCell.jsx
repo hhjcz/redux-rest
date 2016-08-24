@@ -17,11 +17,11 @@ export default class HeaderCell extends React.Component {
     const { filter, sort, column, onFilterChange, onSortChange } = this.props
 
     return (
-      <div className={`myTableRowItem uFlexGrow-${column.width} header`}>
-        <div className="headerTitle uFlexGrow-3">
+      <div className={`myTableRowItem myTableHeader uFlexGrow-${column.width}`}>
+        <div className="myTableHeaderTitle uFlexGrow-3">
           {column.caption}
         </div>
-        <div className="headerIcons uFlexGrow-1">
+        <div className="myTableHeaderIcons uFlexGrow-1">
           <HeaderSort column={column} sort={sort} onSortChange={onSortChange} />
           <HeaderFilter column={column} filter={filter} onFilterChange={onFilterChange} />
         </div>

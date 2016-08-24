@@ -1,6 +1,6 @@
 $activeColor: #dc0000;
 
-.myTable .header {
+.myTableHeader {
 
   display: flex;
   flex-flow: row wrap;
@@ -9,9 +9,6 @@ $activeColor: #dc0000;
   align-items: center;
   font-weight: 700;
   padding: 0.5em 0.4em 0.5em 0.2em;
-  //font-size: 1.2rem;
-  //width 100%
-  //cursor default
 
   &Title {
     display: flex;
@@ -26,7 +23,7 @@ $activeColor: #dc0000;
     justify-content: center;
     font-size: 0.9em;
 
-    & .glyphicon {
+    .glyphicon {
       cursor: pointer;
       padding-right: 0.2em;
       display: flex;
@@ -41,7 +38,7 @@ $activeColor: #dc0000;
     }
   }
 
-  & .filterIcon {
+  .filterIcon {
     cursor: pointer;
     padding-left: 0.2em;
     &:before {
@@ -51,7 +48,8 @@ $activeColor: #dc0000;
       color: $activeColor;
     }
   }
-  & .columnFilter {
+
+  .columnFilter {
     z-index: 1050;
     display: flex;
     position: absolute;

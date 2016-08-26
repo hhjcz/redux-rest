@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "build": "babel src --copy-files --ignore spec.js,spec.jsx --out-dir lib",
+    "build:watch": "npm run build -- --watch",
     "prepublish": "npm run clean && npm run build",
     "clean": "rm -fr lib/ || true",
     "eslint": "eslint --ext=js --ext=jsx src || true",

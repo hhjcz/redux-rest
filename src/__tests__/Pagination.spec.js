@@ -1,6 +1,6 @@
 /** Created by hhj on 12/18/15. */
 import { expect } from 'chai'
-import { Pagination, setPage, setPageSize } from '../Pagination'
+import Pagination, { setPage, setPageSize } from '../Pagination'
 
 describe('pagination', () => {
 

@@ -1,7 +1,7 @@
 /** Created by hhj on 12/18/15. */
 import { Record } from 'immutable'
 
-export const Pagination = Record({
+const Pagination = Record({
   page: 1,
   cursorAt: 1,
   perPage: 10,

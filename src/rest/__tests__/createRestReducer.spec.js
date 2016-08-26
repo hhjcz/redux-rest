@@ -4,8 +4,8 @@ import { List } from 'immutable'
 import createRestReducer from '../createRestReducer'
 import { actionTypesFor } from '../actionTypesFor'
 import { InitialState } from '../reduceHelpers'
-import { Pagination } from '../../Pagination'
-import { Sort } from '../../Sort'
+import Pagination from '../../Pagination'
+import Sort from '../../Sort'
 
 describe('createRestReducer', () => {
 

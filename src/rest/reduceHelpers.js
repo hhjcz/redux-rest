@@ -1,8 +1,8 @@
 /** Created by hhj on 4/12/16. */
 import Immutable, { List, Record, Map } from 'immutable'
 import { compose } from 'redux'
-import { Pagination } from '../Pagination'
-import { Sort } from '../Sort'
+import Pagination from '../Pagination'
+import Sort from '../Sort'
 
 export const InitialState = Record({
   fetching: false,

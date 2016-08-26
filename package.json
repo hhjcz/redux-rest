@@ -1,7 +1,7 @@
 {
-  "name": "@hhjcz/react-lib",
-  "version": "1.0.15",
-  "description": "HHj React reusable components and utils",
+  "name": "@hhjcz/redux-rest",
+  "version": "1.0.0",
+  "description": "Redux REST actions & reducers",
   "main": "lib/rest/index.js",
   "private": false,
   "files": [
@@ -12,16 +12,13 @@
     "build": "babel src --copy-files --ignore spec.js,spec.jsx --out-dir lib",
     "prepublish": "npm run clean && npm run build",
     "clean": "rm -fr lib/ || true",
-    "less": "lessc assets/*.less || true",
-    "stylus": "stylus assets/*.styl || true",
-    "sass": "node-sass assets/*.scss -o assets/ || true",
     "eslint": "eslint --ext=js --ext=jsx src || true",
     "test": "mocha --compilers js:babel-register --require ./test_helper.js --reporter spec --recursive --watch-extensions jsx 'src/**/*.spec.js'",
     "test:watch": "npm run test -- --watch --reporter min"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/hhjcz/react-lib.git"
+    "url": "git+ssh://git@github.com/hhjcz/redux-rest.git"
   },
   "keywords": [
     "react",
@@ -35,22 +32,15 @@
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hhjcz/react-lib/issues"
+    "url": "https://github.com/hhjcz/redux-rest/issues"
   },
-  "homepage": "https://github.com/hhjcz/react-lib#readme",
+  "homepage": "https://github.com/hhjcz/redux-rest#readme",
   "dependencies": {
     "humps": "^1.1.0",
     "immutable": "^3.8.1",
+    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.15.0",
-    "material-ui": "^0.15.4",
     "query-string": "^4.2.3",
-    "react": "^15.3.0",
-    "react-autocomplete": "^1.2.1",
-    "react-bootstrap": "^0.30.2",
-    "react-dom": "^15.3.0",
-    "react-redux": "^4.4.5",
-    "react-redux-toastr": "^3.6.0",
-    "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2"
   },
   "devDependencies": {
@@ -59,7 +49,6 @@
     "babel-eslint": "^6.1.2",
     "babel-plugin-transform-runtime": "^6.12.0",
     "babel-preset-es2015": "^6.13.2",
-    "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.13.0",
     "babel-register": "^6.11.6",
     "babel-runtime": "^6.11.6",
@@ -68,16 +57,9 @@
     "eslint": "^3.2.0",
     "eslint-config-airbnb": "^10.0.0",
     "eslint-plugin-import": "^1.10.3",
-    "eslint-plugin-jsx-a11y": "^2.0.0",
-    "eslint-plugin-react": "^6.0.0",
-    "less": "^2.7.1",
     "mocha": "^3.0.2",
     "nock": "^8.0.0",
-    "node-sass": "^3.8.0",
-    "react-addons-test-utils": "^15.3.0",
     "sinon": "^1.17.5",
-    "sinon-chai": "^2.8.0",
-    "skin-deep": "^0.16.0",
-    "stylus": "^0.54.5"
+    "sinon-chai": "^2.8.0"
   }
 }

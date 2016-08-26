@@ -1,9 +1,9 @@
 /** Created by hhj on 1/29/16. */
 import { decamelizeKeys } from 'humps'
-import handleError from '../myErrorHandler'
 import createResource from './createResource'
 import { getSubState, getAuthSubState } from './utils'
 import queryGenerators from './queryGenerators'
+import Filter from '../Filter'
 
 export default function createRestAction(endpointName, config, actionCreators, depsContainer) {
   const getThisSubState = getSubState(endpointName)
@@ -51,7 +51,7 @@ export default function createRestAction(endpointName, config, actionCreators, d
             console.log(error)
             const errorMessage = `${error.message}`
             dispatch(subActionCreators.error({ errorMessage }))
-            handleError(errorMessage)
+            depsContainer.errorHandler(errorMessage)
           })
       })
     }
@@ -89,7 +89,7 @@ export default function createRestAction(endpointName, config, actionCreators, d
 
     const subState = getSubState('zarizeni')(getState)
     const id = subState.ids.get(cursorAt - 1)
-    if (!id) handleError(`No valid zarizeni found at position ${cursorAt}`)
+    if (!id) depsContainer.handleError(`No valid zarizeni found at position ${cursorAt}`)
 
     return fetchOne({ params: { id } })
   }
@@ -123,7 +123,10 @@ export default function createRestAction(endpointName, config, actionCreators, d
    */
   const filterChange = filter => ({ dispatch }) => {
     if (filter.constructor !== Array) filter = [filter]
-    filter.forEach(filter => dispatch(actionCreators.filterChange({ filter })))
+    filter.forEach(filter => {
+      if (!(filter instanceof Filter)) filter = new Filter(filter)
+      dispatch(actionCreators.filterChange({ filter }))
+    })
     return updateCollection()
   }
 

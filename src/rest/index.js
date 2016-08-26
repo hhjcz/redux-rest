@@ -9,9 +9,9 @@ import { createAuthActions } from './authActions'
 export { getSubState, getItems, getItem, getIdAtCursor } from './utils'
 export const collectionTypes = { static: 'static', dynamic: 'dynamic' }
 
-export default function createMyRest(config = {}, fetch = () => ({}), dispatch = null) {
+export default function createMyRest(config = {}, fetch = () => ({}), dispatch = null, errorHandler = null) {
   const myRest = { actions: {}, reducers: {}, entityReducers: {} }
-  const depsContainer = { fetch, dispatch }
+  const depsContainer = { fetch, dispatch, errorHandler }
 
   // authentication reducer and actions:
   const authActions = createAuthActions(depsContainer)

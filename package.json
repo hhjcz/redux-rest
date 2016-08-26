@@ -1,6 +1,6 @@
 {
   "name": "@hhjcz/redux-rest",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Redux REST actions & reducers",
   "main": "lib/rest/index.js",
   "private": false,

@@ -5,7 +5,7 @@ import nock from 'nock'
 import createFetch from '../createFetch'
 import createResource from '../createResource'
 
-describe('myRest library createResource', () => {
+describe('createRest library createResource', () => {
   afterEach(() => {
     nock.cleanAll()
   })

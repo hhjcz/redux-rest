@@ -87,9 +87,9 @@ export default function createRestAction(endpointName, config, actionCreators, d
   const fetchOneAt = cursorAt => ({ dispatch, getState }) => {
     dispatch(actionCreators.pointCursorTo({ cursorAt }))
 
-    const subState = getSubState('zarizeni')(getState)
+    const subState = getThisSubState(getState)
     const id = subState.ids.get(cursorAt - 1)
-    if (!id) depsContainer.handleError(`No valid zarizeni found at position ${cursorAt}`)
+    if (!id) depsContainer.handleError(`No valid resource '${endpointName}' found at position ${cursorAt}`)
 
     return fetchOne({ params: { id } })
   }

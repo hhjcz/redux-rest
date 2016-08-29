@@ -1,6 +1,6 @@
 /** Created by hhj on 1/29/16. */
 import { decamelizeKeys } from 'humps'
-import createResource from '../fetch/createResource'
+import createResource from '../resource/createResource'
 import { getSubState, getAuthSubState } from '../utils'
 import queryGenerators from '../queryGenerators'
 import Filter from '../models/Filter'
@@ -14,9 +14,14 @@ export default function createRestAction(endpointName, config, actionCreators, d
 
   /**
    *  create ASYNC action creators
+   *
+   * @param {string} actionName
+   * @param {string} resourceMethod Specify method of the resource to be called, when it differs from actionName
+   * @param methodExtraParams
+   * @returns {function({}=)}
    */
-  const createAsyncAction = (actionName, fetchMethod = null, methodExtraParams = {}) => {
-    if (!fetchMethod) fetchMethod = actionName
+  const createAsyncAction = (actionName, resourceMethod = null, methodExtraParams = {}) => {
+    if (!resourceMethod) resourceMethod = actionName
 
     const subActionCreators = {
       requested: actionCreators[`${actionName}Requested`],
@@ -33,7 +38,7 @@ export default function createRestAction(endpointName, config, actionCreators, d
         const state = getThisSubState(getState)
         const authState = getAuthSubState(getState)
         const queryParams = { ...queryGenerator(state), ...extraParams, ...decamelizeKeys(params), ...methodExtraParams } // eslint-disable-line max-len
-        const { executeFetch } = resource[fetchMethod](queryParams, body, authState ? authState.token : '')
+        const { executeFetch } = resource[resourceMethod](queryParams, body, authState ? authState.token : '')
 
         dispatch(subActionCreators.requested())
 

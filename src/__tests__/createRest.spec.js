@@ -45,7 +45,7 @@ describe('rest lib createRest', () => {
     expect(typeof reducers.someEndpoint).to.equal('function')
   })
 
-  it('should use provided fetch', () => {
+  it('should use provided resource', () => {
     dispatch(rest.actions.someEndpoint.fetchCollection())
   })
 })

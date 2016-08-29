@@ -12,12 +12,12 @@ describe('createRest library createFetch', () => {
   const baseUrl = 'http://example.com'
   const expectedResponse = { body: { something: 'new' } }
 
-  it('should create fetch', () => {
+  it('should create resource', () => {
     const fetch = createFetch(baseUrl)
     expect(typeof fetch).to.equal('function')
   })
 
-  it('fetch should return response', () => {
+  it('resource should return response', () => {
     nock(baseUrl).get('/someEndpoint').reply(200, expectedResponse)
 
     const fetch = createFetch(baseUrl)
@@ -29,7 +29,7 @@ describe('createRest library createFetch', () => {
       })
   })
 
-  it('fetch should return error', () => {
+  it('resource should return error', () => {
     nock(baseUrl).get('/someEndpoint').reply(400)
 
     const fetch = createFetch(baseUrl)

@@ -59,7 +59,7 @@ describe('createRest library createResource', () => {
     const resource = createResource('someResource', { url: endPoint }, { fetch })
 
     return resource.fetchCollection({}).executeFetch().catch(error => {
-      expect(error.message).to.equal('Ajejej, fetch error: Not found (status 404), url: /someEndpoint')
+      expect(error.message).to.equal('Ajejej, resource error: Not found (status 404), url: /someEndpoint')
     })
   })
 })

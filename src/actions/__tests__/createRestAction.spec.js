@@ -1,7 +1,7 @@
 /** Created by hhj on 3/15/16. */
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai'
-import createRestAction from '../createRestAction'
+import createRestAction from '../createRestActions'
 import { actionTypesFor } from '../actionTypesFor'
 import { actionCreatorsFor } from '../actionCreatorsFor'
 import { generateSubState } from '../../utils'

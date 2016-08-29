@@ -5,7 +5,7 @@ import { getSubState, getAuthSubState } from '../utils'
 import queryGenerators from '../queryGenerators'
 import Filter from '../models/Filter'
 
-export default function createRestAction(endpointName, config, actionCreators, depsContainer) {
+export default function createRestActions(endpointName, config, actionCreators, depsContainer) {
   const getThisSubState = getSubState(endpointName)
 
   const resource = createResource(endpointName, config, depsContainer)

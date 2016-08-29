@@ -1,7 +1,7 @@
 /** Created by hhj on 2/3/16. */
 import snakeCase from 'lodash/snakeCase'
 
-const actionPrefix = '@my-rest'
+const actionPrefix = '@redux-rest'
 
 function syncAction(resource, action, subAction = null) {
   const upperResource = snakeCase(resource).toUpperCase()

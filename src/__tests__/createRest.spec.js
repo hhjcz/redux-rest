@@ -27,8 +27,9 @@ describe('createRest', () => {
   }
 
   beforeEach(() => {
-    rest = createRest({ someEndpoint: { url: '/someUrl' } }, fetch)
-    rest.use('dispatch', dispatch)
+    const config = { someEndpoint: { url: '/someUrl' } }
+    const depsContainer = { fetch, dispatch }
+    rest = createRest(config, depsContainer)
     reducer = rest.reducers.someEndpoint
   })
 

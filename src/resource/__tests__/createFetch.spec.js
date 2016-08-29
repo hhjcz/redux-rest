@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import nock from 'nock'
 import createFetch from '../createFetch'
 
-describe('createRest library createFetch', () => {
+describe('createFetch', () => {
   afterEach(() => {
     nock.cleanAll()
   })

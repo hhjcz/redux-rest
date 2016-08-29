@@ -3,7 +3,7 @@ import { expect } from 'chai'
 
 import serializeParamsToUrl from '../serializeParamsToUrl'
 
-describe('rest library serializeParamsToUrl', () => {
+describe('serializeParamsToUrl', () => {
 
   it('should serialize main params', () => {
     expect(serializeParamsToUrl('/endpoint/:id', { id: 666 })).to.equal('/endpoint/666')

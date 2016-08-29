@@ -6,7 +6,7 @@ import { actionTypesFor } from '../actionTypesFor'
 import { actionCreatorsFor } from '../actionCreatorsFor'
 import { generateSubState } from '../../utils'
 
-describe('rest lib createRestAction', () => {
+describe('createRestAction', () => {
 
   const endpointName = 'povidky'
   const config = {

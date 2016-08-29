@@ -5,7 +5,7 @@ import nock from 'nock'
 import createFetch from '../createFetch'
 import createResource from '../createResource'
 
-describe('createRest library createResource', () => {
+describe('createResource', () => {
   afterEach(() => {
     nock.cleanAll()
   })
@@ -19,7 +19,7 @@ describe('createRest library createResource', () => {
   it('should return proper response as a promise', () => {
     const fetch = () => Promise.resolve({})
     const resource = createResource('someResource', {}, { fetch })
-    return resource.fetchOne({}).executeFetch().then(response => {
+    return resource.fetchOne({}).executeResourceMethod().then(response => {
       expect(response).to.have.property('data')
       expect(response).to.have.property('meta')
     })
@@ -28,7 +28,7 @@ describe('createRest library createResource', () => {
   it('should throw error', () => {
     const fetch = () => Promise.reject('Nejaka chyba api')
     const resource = createResource('someResource', {}, { fetch })
-    return resource.fetchOne({}).executeFetch().catch(error => {
+    return resource.fetchOne({}).executeResourceMethod().catch(error => {
       expect(error).to.be.instanceOf(Error)
     })
   })
@@ -42,7 +42,7 @@ describe('createRest library createResource', () => {
 
     const resource = createResource('someResource', { url: endPoint }, { fetch })
 
-    return resource.fetchCollection({}).executeFetch().then(response => {
+    return resource.fetchCollection({}).executeResourceMethod().then(response => {
       expect(response).to.have.property('data')
       expect(response.data).to.deep.equal(expectedResponse.data)
       expect(response).to.have.property('meta')
@@ -58,7 +58,7 @@ describe('createRest library createResource', () => {
 
     const resource = createResource('someResource', { url: endPoint }, { fetch })
 
-    return resource.fetchCollection({}).executeFetch().catch(error => {
+    return resource.fetchCollection({}).executeResourceMethod().catch(error => {
       expect(error.message).to.equal('Ajejej, resource error: Not found (status 404), url: /someEndpoint')
     })
   })

@@ -38,11 +38,11 @@ export default function createRestAction(endpointName, config, actionCreators, d
         const state = getThisSubState(getState)
         const authState = getAuthSubState(getState)
         const queryParams = { ...queryGenerator(state), ...extraParams, ...decamelizeKeys(params), ...methodExtraParams } // eslint-disable-line max-len
-        const { executeFetch } = resource[resourceMethod](queryParams, body, authState ? authState.token : '')
+        const { executeResourceMethod } = resource[resourceMethod](queryParams, body, authState ? authState.token : '')
 
         dispatch(subActionCreators.requested())
 
-        return executeFetch()
+        return executeResourceMethod()
           .then(response => {
             if (response.status === 401 || response.status === 403) {
               dispatch(actionCreators.authenticationRequired())

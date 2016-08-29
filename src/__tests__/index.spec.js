@@ -12,7 +12,7 @@ import createRest, {
 } from '../index'
 
 
-describe('rest lib index', () => {
+describe('index', () => {
 
   it('exports default', () => {
     expect(typeof createRest).to.equal('function')

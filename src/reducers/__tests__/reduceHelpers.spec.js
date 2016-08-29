@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import { List, Map } from 'immutable'
 import * as reduceHelpers from '../reduceHelpers'
 
-describe('rest lib reduceHelpers', () => {
+describe('reduceHelpers', () => {
   let initialState
   beforeEach(() => {
     initialState = new reduceHelpers.InitialState()

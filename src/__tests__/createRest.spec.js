@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import createRest from '../createRest'
 import { generateSubState } from '../utils'
 
-describe('rest lib createRest', () => {
+describe('createRest', () => {
 
   let reducer
   let rest

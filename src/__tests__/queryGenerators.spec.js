@@ -7,7 +7,7 @@ import Filter from '../models/Filter'
 import Sort from '../models/Sort'
 import Pagination from '../models/Pagination'
 
-describe('rest library queryGenerators', () => {
+describe('queryGenerators', () => {
   const { fetchCollection: collectionGenerator, fetchOne: itemGenerator } = queryGenerators
 
   it('should generate query params', () => {

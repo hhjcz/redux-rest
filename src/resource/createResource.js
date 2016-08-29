@@ -32,7 +32,7 @@ export default function createResource(resourceName, _config, fetchHolder) {
       const headers = makeHeaders(authToken)
       const bodyObj = ['GET', 'HEAD'].indexOf(method) === -1 ? { body: JSON.stringify(body) } : {}
 
-      function executeFetch() {
+      function executeResourceMethod() {
         return fetchHolder.fetch(url, { method, headers, ...bodyObj })
           .then(response => {
             const normalizedResponse = responseTransformer(response)
@@ -46,7 +46,7 @@ export default function createResource(resourceName, _config, fetchHolder) {
           })
       }
 
-      return { fetchUrl: url, executeFetch }
+      return { fetchUrl: url, executeResourceMethod }
     }
   }
 

@@ -1,7 +1,7 @@
 /** Created by hhj on 1/29/16. */
 import { expect } from 'chai'
 import { List } from 'immutable'
-import { revive } from '../reducers/reduceHelpers'
+import { revive } from '../reducers/InitialState'
 import { getSubState, getItems, getItem, generateSubState, getIdAtCursor } from '../utils'
 
 describe('rest utils', () => {

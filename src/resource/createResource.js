@@ -1,11 +1,10 @@
 /** Created by hhj on 2/11/16. */
 /* eslint-disable no-unused-expressions, no-unused-vars, import/no-extraneous-dependencies */
-import responseTransformers from './responseTransformers'
+import createResponseNormalizers from './responseNormalizers'
 import serializeParamsToUrl from './serializeParamsToUrl'
 
 const defaultConfig = () => ({
-  url: '/',
-  responseTransformers,
+  url: '/'
 })
 
 const makeHeaders = (authToken) => ({
@@ -23,9 +22,10 @@ const makeHeaders = (authToken) => ({
  */
 export default function createResource(resourceName, _config, fetchHolder) {
   const config = { ...defaultConfig(), ..._config }
+  const responseNormalizers = createResponseNormalizers(config.collectionTransformer || (collection => collection))
 
   const createMethod = (methodName, method = 'GET') => {
-    const responseTransformer = config.responseTransformers[methodName]
+    const responseTransformer = responseNormalizers[methodName]
 
     return function resourceMethod(params = {}, body = {}, authToken = '') {
       const url = serializeParamsToUrl(config.url, params)

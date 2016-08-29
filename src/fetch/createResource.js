@@ -1,7 +1,7 @@
 /** Created by hhj on 2/11/16. */
 /* eslint-disable no-unused-expressions, no-unused-vars, import/no-extraneous-dependencies */
-import responseTransformers from './responseTransformers'
-import serializeParamsToUrl from './serializeParamsToUrl'
+import responseTransformers from '../responseTransformers'
+import serializeParamsToUrl from '../serializeParamsToUrl'
 
 const defaultConfig = () => ({
   url: '/',

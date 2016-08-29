@@ -1,6 +1,6 @@
 /** Created by hhj on 7/13/16. */
 import { Record } from 'immutable'
-import * as actions from './authActions'
+import * as actions from '../actions/authActions'
 
 const InitialState = Record({
   isAuthenticationRequired: false,

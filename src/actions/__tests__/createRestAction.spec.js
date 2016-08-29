@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import createRestAction from '../createRestAction'
 import { actionTypesFor } from '../actionTypesFor'
 import { actionCreatorsFor } from '../actionCreatorsFor'
-import { generateSubState } from '../utils'
+import { generateSubState } from '../../utils'
 
 describe('rest lib createRestAction', () => {
 

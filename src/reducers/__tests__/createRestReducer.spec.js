@@ -1,11 +1,11 @@
 /** Created by hhj on 2/1/16. */
 import { expect } from 'chai'
 import { List } from 'immutable'
-import createRestReducer from '../createRestReducer'
-import { actionTypesFor } from '../actionTypesFor'
+import { actionTypesFor } from '../../actions/actionTypesFor'
 import { InitialState } from '../reduceHelpers'
-import Pagination from '../../Pagination'
-import Sort from '../../Sort'
+import Pagination from '../../models/Pagination'
+import Sort from '../../models/Sort'
+import createRestReducer from '../createRestReducer'
 
 describe('createRestReducer', () => {
 
@@ -22,7 +22,7 @@ describe('createRestReducer', () => {
     expect(state).to.be.instanceOf(InitialState)
   })
 
-  describe('sync rest actions reducer', () => {
+  describe('sync rest actions reducers', () => {
     const actionTypes = actionTypesFor('someEndpoint')
     const reducer = createRestReducer('someEndpoint', { url: 'someUrl' }, actionTypes)
     const initialState = reducer({

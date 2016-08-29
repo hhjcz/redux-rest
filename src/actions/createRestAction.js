@@ -1,9 +1,9 @@
 /** Created by hhj on 1/29/16. */
 import { decamelizeKeys } from 'humps'
-import createResource from './createResource'
-import { getSubState, getAuthSubState } from './utils'
-import queryGenerators from './queryGenerators'
-import Filter from '../Filter'
+import createResource from '../fetch/createResource'
+import { getSubState, getAuthSubState } from '../utils'
+import queryGenerators from '../queryGenerators'
+import Filter from '../models/Filter'
 
 export default function createRestAction(endpointName, config, actionCreators, depsContainer) {
   const getThisSubState = getSubState(endpointName)

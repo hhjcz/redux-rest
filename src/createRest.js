@@ -1,16 +1,16 @@
 /** Created by hhj on 1/29/16. */
-import createRestReducer from './createRestReducer'
-import createRestAction from './createRestAction'
-import { actionTypesFor } from './actionTypesFor'
-import { actionCreatorsFor } from './actionCreatorsFor'
-import authReducer from './authReducer'
-import { createAuthActions } from './authActions'
+import createRestReducer from './reducers/createRestReducer'
+import createRestAction from './actions/createRestAction'
+import { actionTypesFor } from './actions/actionTypesFor'
+import { actionCreatorsFor } from './actions/actionCreatorsFor'
+import authReducer from './reducers/authReducer'
+import { createAuthActions } from './actions/authActions'
 
 export default function createMyRest(config = {}, fetch = () => ({}), dispatch = null, errorHandler = null) {
   const myRest = { actions: {}, reducers: {}, entityReducers: {} }
   const depsContainer = { fetch, dispatch, errorHandler }
 
-  // authentication reducer and actions:
+  // authentication reducers and actions:
   const authActions = createAuthActions(depsContainer)
   myRest.reducers.auth = authReducer
   myRest.actions.auth = authActions

@@ -2,13 +2,13 @@
 import createRest from './createRest'
 
 export { getSubState, getItems, getItem, getIdAtCursor } from './utils'
-export createFetch from './createFetch'
+export createFetch from './fetch/createFetch'
 export const collectionTypes = { static: 'static', dynamic: 'dynamic' }
 
-export Pagination from '../Pagination'
-export Sort from '../Sort'
-export Filter from '../Filter'
-export createFetch from './createFetch'
+export Pagination from './models/Pagination'
+export Sort from './models/Sort'
+export Filter from './models/Filter'
+export createFetch from './fetch/createFetch'
 
 export default createRest
 

@@ -1,7 +1,7 @@
 /** Created by hhj on 7/14/16. */
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai'
-import { createAuthActions, AUTHENTICATION_REQUIRED } from '../authActions'
+import { createAuthActions, AUTHENTICATION_REQUIRED } from './authActions'
 
 describe('rest lib authActions', () => {
   let passedUrl

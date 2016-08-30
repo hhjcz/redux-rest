@@ -1,6 +1,5 @@
 /** Created by hhj on 4/12/16. */
-import Immutable, { List, Record, Map } from 'immutable'
-import { compose } from 'redux'
+import { List, Record, Map } from 'immutable'
 import Pagination from '../models/Pagination'
 import Sort from '../models/Sort'
 
@@ -17,23 +16,23 @@ export const InitialState = Record({
   generalParams: Map(),
 })
 
+/**
+ * @param {Object{ fromState
+ * @returns {Map<string, any>}
+ */
+export function makeInitialState(fromState = {}) {
+  const { fetching, lastFetchSignature, ids, items, entities, item, pagination, sort, filters, generalParams } = fromState
+  const normalizedFromState = {}
+  if (fetching !== undefined) normalizedFromState.fetching = fetching
+  if (lastFetchSignature) normalizedFromState.lastFetchSignature = lastFetchSignature
+  if (ids) normalizedFromState.ids = List(ids)
+  if (items) normalizedFromState.items = List(items)
+  if (item) normalizedFromState.item = item
+  if (entities) normalizedFromState.entities = Map(entities) // .map(itemTransformer)
+  if (pagination) normalizedFromState.pagination = new Pagination(pagination)
+  if (sort) normalizedFromState.sort = new Sort(sort)
+  if (filters) normalizedFromState.filters = Map(filters)
+  if (generalParams) normalizedFromState.generalParams = Map(generalParams)
 
-// Note how JSON from server is revived to immutable record.
-export const revive = (state = {}, initialState = new InitialState(), itemTransformer = x => x) => {
-  const { fetching, lastFetchSignature, ids, items, entities, item, pagination, sort, filters, generalParams } = state
-  const mergeObj = {}
-  if (fetching !== undefined) mergeObj.fetching = fetching
-  if (lastFetchSignature) mergeObj.lastFetchSignature = lastFetchSignature
-  if (ids) mergeObj.ids = List(ids)
-  if (items) mergeObj.items = List(items)
-  if (item) mergeObj.item = item
-  if (entities) mergeObj.entities = Map(entities).map(itemTransformer)
-  if (pagination) mergeObj.pagination = new Pagination(pagination)
-  if (sort) mergeObj.sort = new Sort(sort)
-  if (filters) mergeObj.filters = Map(filters)
-  if (generalParams) mergeObj.generalParams = Map(generalParams)
-
-  console.log(initialState)
-  return initialState.merge(mergeObj)
+  return new InitialState(normalizedFromState)
 }
-

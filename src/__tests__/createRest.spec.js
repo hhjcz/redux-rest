@@ -20,7 +20,7 @@ describe('createRest', () => {
     if (action.type === '@@my-rest/SOME_ENDPOINT_SUCCESS') {
       expect(action.data).not.to.be.undefined // eslint-disable-line no-unused-expressions
     }
-    const initialState = reducer(getState())
+    const initialState = reducer(getState(), {})
     reducer(initialState, action)
 
     return action

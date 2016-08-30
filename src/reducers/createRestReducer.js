@@ -2,8 +2,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-case-declarations */
 import { combineReducers } from 'redux'
-import { List, Record, Map } from 'immutable'
-import { InitialState, revive } from './InitialState'
+import { InitialState, makeInitialState } from './InitialState'
 import createIsFetching from './isFetchingReducer'
 import createLastFetchSignature from './lastFetchSignatureReducer'
 import createIdsReducer from './idsReducer'
@@ -42,14 +41,12 @@ export default function createRestReducer(endpointName, config = {}, actionTypes
 
 
   return function restReducer(state, action) {
-    // TODO test state not initialized (was state not instance of InitialState)
-    if (!(state instanceof InitialState)) {
-      return new InitialState(state)
-    }
-    if (!action || !action.type) {
-      return state
-    }
+    if (!(state instanceof InitialState)) return makeInitialState({ ...defaultState, ...state })
+    // if (!action.type) return state
 
-    return combinedReducers(state, action)
+    // combineReducers works with plain object state only
+    const nextState = combinedReducers(state.toObject(), action)
+    // convert back to immutable after reducing
+    return new InitialState(nextState)
   }
 }

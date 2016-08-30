@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import { makeInitialState } from '../../reducers/InitialState'
 import * as selectors from '../index'
 
-describe.only('selectors', () => {
+describe('selectors', () => {
   const resource1 = { foo: 'bar' }
   const resource2 = { foo2: 'bar2' }
   const resource3 = makeInitialState({ items: [1, 2, 3] })

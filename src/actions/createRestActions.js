@@ -93,7 +93,7 @@ export default function createRestActions(endpointName, config, actionCreators, 
   const fetchOneAt = cursorAt => ({ dispatch, getState }) => {
     dispatch(actionCreators.pointCursorTo({ cursorAt }))
 
-    const subState = getThisSubState(getState)
+    const subState = getResourceState(getState())
     const id = subState.ids.get(cursorAt - 1)
     if (!id) depsContainer.handleError(`No valid resource '${endpointName}' found at position ${cursorAt}`)
 

@@ -43,6 +43,7 @@ export default function createRestReducer(endpointName, config = {}, actionTypes
   return function restReducer(state, action) {
     if (!(state instanceof InitialState)) return makeInitialState({ ...defaultState, ...state })
     // if (!action.type) return state
+    // if (action.type.toLowerCase().indexOf(endpointName.toLowerCase()) === -1) return state
 
     // combineReducers works with plain object state only
     const nextState = combinedReducers(state.toObject(), action)

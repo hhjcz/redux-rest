@@ -15,7 +15,7 @@ function getEntity(id) {
  * @returns {Array|Iterable<K, *>}
  */
 export function getItems(resourceState) {
-  if (resourceState.items) return resourceState.items
+  if (resourceState && resourceState.items) return resourceState.items
   const entities = getEntities(resourceState)
   const items = getCollectionIds(resourceState)
     .filter(id => getEntity(id)(entities) !== undefined)
@@ -31,6 +31,7 @@ export function getItems(resourceState) {
  * @returns {function(resourcesRoot)}
  */
 export function getItem(resourceState, defaultValue = {}) {
+  if (resourceState && resourceState.item) return resourceState.item
   const entities = getEntities(resourceState)
 
   return getEntity(getItemId(resourceState))(entities) || defaultValue

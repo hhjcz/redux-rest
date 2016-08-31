@@ -6,7 +6,7 @@ import queryGenerators from '../queryGenerators'
 import Filter from '../models/Filter'
 
 export default function createRestActions(endpointName, config, actionCreators, depsContainer) {
-  const getResourceState = getResourceTree(endpointName)(config.getRootTree)
+  const getThisState = getResourceTree(config.getRootTree)(endpointName)
   const getAuthState = getAuthTree(config.getRootTree)
 
   const resource = createResource(endpointName, config, depsContainer)
@@ -36,7 +36,7 @@ export default function createRestActions(endpointName, config, actionCreators, 
 
       return depsContainer.dispatch(({ dispatch, getState }) => {
 
-        const state = getResourceState(getState())
+        const state = getThisState(getState())
         const authState = getAuthState(getState())
         const queryParams = { ...queryGenerator(state), ...extraParams, ...decamelizeKeys(params), ...methodExtraParams } // eslint-disable-line max-len
         const { executeResourceMethod } = resource[resourceMethod](queryParams, body, authState ? authState.token : '')
@@ -93,7 +93,7 @@ export default function createRestActions(endpointName, config, actionCreators, 
   const fetchOneAt = cursorAt => ({ dispatch, getState }) => {
     dispatch(actionCreators.pointCursorTo({ cursorAt }))
 
-    const subState = getResourceState(getState())
+    const subState = getThisState(getState())
     const id = subState.ids.get(cursorAt - 1)
     if (!id) depsContainer.handleError(`No valid resource '${endpointName}' found at position ${cursorAt}`)
 

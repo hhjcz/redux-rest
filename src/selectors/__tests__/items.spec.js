@@ -17,14 +17,14 @@ describe('items selectors', () => {
       })
     })
 
-    it('should handle empty resource state', () => {
+    it('handles empty resource state', () => {
       let items = getItems()
       expect(items).to.equal(List())
       items = getItems(null)
       expect(items).to.equal(List())
     })
 
-    it('should get items from resource', () => {
+    it('selects items from resource', () => {
       const items = getItems(resourceState)
       expect(items).to.be.instanceOf(List)
       expect(items.toArray()).to.deep.equal([{ id: 66, name: 'name66' }, { id: 77, name: 'name77' }])
@@ -41,12 +41,12 @@ describe('items selectors', () => {
       })
     })
 
-    it('should handle empty resource', () => {
+    it('handles empty resource', () => {
       const item = getItem()
       expect(item).to.deep.equal({})
     })
 
-    it('should get items from resource', () => {
+    it('selects items from resource', () => {
       const item = getItem(resourceState)
       expect(item).to.deep.equal({ id: 66, name: 'name66' })
     })

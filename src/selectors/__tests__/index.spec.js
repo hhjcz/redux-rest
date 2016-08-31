@@ -17,12 +17,12 @@ describe('resources selectors', () => {
   }
 
   it('selects resource', () => {
-    const resource1State = getResourceWithItems('resource1')(state)
+    const resource1State = getResourceWithItems(state => state)('resource1')(state)
     expect(resource1State.foo1).to.deep.equal('foo1')
   })
 
   it('selects with inserted items', () => {
-    const resource3 = getResourceWithItems('resource3')(state)
+    const resource3 = getResourceWithItems(state => state)('resource3')(state)
 
     const expectedItem = { bar: 'bar' }
     const expectedItems = [{ foo: 'foo' }, { baz: 'baz' }]

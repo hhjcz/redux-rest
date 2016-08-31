@@ -7,32 +7,32 @@ export { getIdAtCursor } from './ids'
 export { getAuthTree } from './auth'
 
 /**
- * @param resourceName
- * @returns {function(resourcesRoot): *}
+ * @param getResourcesRoot
+ * @returns {function(*): function(*=)}
  */
-export function getResourceWithItems(resourceName) {
-  return (resourcesRoot) => {
-    const resource = resourcesRoot[resourceName]
-
-    // insert items:
-    const items = getItems(resource)
-    const item = getItem(resource)
-    const resourceObj = resource && resource.toObject ? resource.toObject() : resource
-
-    return { ...resourceObj, items, item }
-  }
+export function getResourceTree(getResourcesRoot) {
+  return (resourceName) =>
+    (state) => {
+      const resourcesRoot = getResourcesRoot(state)
+      const resource = resourcesRoot[resourceName]
+      return resource && resource.toObject ? resource.toObject() : resource
+    }
 }
 
 /**
- * @param resourceName
- * @returns {function(*)}
+ * @param getResourcesRoot
+ * @returns {function(*=)}
  */
-export function getResourceTree(resourceName) {
-  return (getResourcesRoot) => {
-    return (state) => {
-      const resourcesRoot = getResourcesRoot(state)
-      const subState = resourcesRoot[resourceName]
-      return subState && subState.toObject ? subState.toObject() : subState
+export function getResourceWithItems(getResourcesRoot) {
+  return (resourceName) =>
+    (state) => {
+      const resourceObj = getResourceTree(getResourcesRoot)(resourceName)(state)
+
+      // insert items:
+      const items = getItems(resourceObj)
+      const item = getItem(resourceObj)
+
+      return { ...resourceObj, items, item }
     }
-  }
 }
+

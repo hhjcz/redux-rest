@@ -26,7 +26,6 @@ export default function createEntitiesReducer(actionTypes, itemTransformer = x =
 
       case actionTypes.fetchCollectionSuccess:
       case actionTypes.fetchCollectionByIdsSuccess:
-      case actionTypes.fetchIdsSuccess:
         return mergeEntities(state, items)
 
       case actionTypes.clearEntities:

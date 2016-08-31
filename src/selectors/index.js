@@ -17,7 +17,7 @@ export function getResourceWithItems(resourceName) {
     // insert items:
     const items = getItems(resource)
     const item = getItem(resource)
-    const resourceObj = resource.toObject ? resource.toObject() : resource
+    const resourceObj = resource && resource.toObject ? resource.toObject() : resource
 
     return { ...resourceObj, items, item }
   }
@@ -32,7 +32,7 @@ export function getResourceTree(resourceName) {
     return (state) => {
       const resourcesRoot = getResourcesRoot(state)
       const subState = resourcesRoot[resourceName]
-      return subState.toObject ? subState.toObject() : subState
+      return subState && subState.toObject ? subState.toObject() : subState
     }
   }
 }

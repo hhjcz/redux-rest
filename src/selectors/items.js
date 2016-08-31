@@ -15,6 +15,7 @@ function getEntity(id) {
  * @returns {Array|Iterable<K, *>}
  */
 export function getItems(resourceState) {
+  if (resourceState.items) return resourceState.items
   const entities = getEntities(resourceState)
   const items = getCollectionIds(resourceState)
     .filter(id => getEntity(id)(entities) !== undefined)

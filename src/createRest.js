@@ -49,6 +49,9 @@ export default function createRest(config = {}, depsContainer = {}) {
       actionTypes)
     rest.reducers[resourceName] = reducer
     rest[resourceName].reducer = reducer
+
+    // utils
+    rest.getRootTree = config.getRootTree
   })
 
 

@@ -15,12 +15,11 @@ import createFilters from './filtersReducer'
 import createGeneralParams from './generalParamsReducer'
 
 /**
- * @param endpointName
  * @param config
  * @param {ActionTypes} actionTypes
  * @returns {reducer}
  */
-export default function createRestReducer(endpointName, config = {}, actionTypes = {}) {
+export default function createRestReducer(config = {}, actionTypes = {}) {
   const itemTransformer = config.itemTransformer || (item => item)
   const idField = config.idField || 'id'
 

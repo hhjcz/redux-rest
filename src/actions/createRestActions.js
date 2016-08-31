@@ -5,11 +5,11 @@ import { getResourceTree, getAuthTree } from '../selectors'
 import queryGenerators from '../queryGenerators'
 import Filter from '../models/Filter'
 
-export default function createRestActions(endpointName, config, actionCreators, depsContainer) {
-  const getThisState = getResourceTree(config.getRootTree)(endpointName)
+export default function createRestActions(resourceName, config, actionCreators, depsContainer) {
+  const getThisState = getResourceTree(config.getRootTree)(resourceName)
   const getAuthState = getAuthTree(config.getRootTree)
 
-  const resource = createResource(endpointName, config, depsContainer)
+  const resource = createResource(resourceName, config, depsContainer)
   const extraParams = decamelizeKeys(config.extraParams)
   const isStaticCollection = config.isStaticCollection || false
 
@@ -95,7 +95,7 @@ export default function createRestActions(endpointName, config, actionCreators, 
 
     const subState = getThisState(getState())
     const id = subState.ids.get(cursorAt - 1)
-    if (!id) depsContainer.handleError(`No valid resource '${endpointName}' found at position ${cursorAt}`)
+    if (!id) depsContainer.handleError(`No valid resource '${resourceName}' found at position ${cursorAt}`)
 
     return fetchOne({ params: { id } })
   }

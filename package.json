@@ -12,6 +12,7 @@
     "build": "babel src --copy-files --ignore spec.js,spec.jsx --out-dir lib",
     "build:watch": "npm run build -- --watch",
     "build:dev": "babel src --copy-files --ignore spec.js,spec.jsx --watch --out-dir ../dohlestr-frontend/my_libs/redux-rest",
+    "build:dev2": "babel src --copy-files --ignore spec.js,spec.jsx --watch --out-dir ../dohlestr-frontend/node_modules/@hhjcz/redux-rest/lib/",
     "prepublish": "npm run clean && npm run build",
     "clean": "rm -fr lib/ || true",
     "eslint": "eslint --ext=js --ext=jsx src || true",

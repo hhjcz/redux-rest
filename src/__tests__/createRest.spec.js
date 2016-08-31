@@ -27,7 +27,10 @@ describe('createRest', () => {
   }
 
   beforeEach(() => {
-    const config = { someEndpoint: { url: '/someUrl' } }
+    const config = {
+      getRootState: (state) => state.resources,
+      resources: { someEndpoint: { url: '/someUrl' } }
+    }
     const depsContainer = { fetch, dispatch }
     rest = createRest(config, depsContainer)
     reducer = rest.reducers.someEndpoint

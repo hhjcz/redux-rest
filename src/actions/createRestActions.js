@@ -1,12 +1,13 @@
 /** Created by hhj on 1/29/16. */
 import { decamelizeKeys } from 'humps'
 import createResource from '../resource/createResource'
-import { getSubState, getAuthSubState } from '../utils'
+import { getResourceTree, getAuthTree } from '../selectors'
 import queryGenerators from '../queryGenerators'
 import Filter from '../models/Filter'
 
 export default function createRestActions(endpointName, config, actionCreators, depsContainer) {
-  const getThisSubState = getSubState(endpointName)
+  const getResourceState = getResourceTree(endpointName)(config.getRootTree)
+  const getAuthState = getAuthTree(config.getRootTree)
 
   const resource = createResource(endpointName, config, depsContainer)
   const extraParams = decamelizeKeys(config.extraParams)
@@ -35,8 +36,8 @@ export default function createRestActions(endpointName, config, actionCreators, 
 
       return depsContainer.dispatch(({ dispatch, getState }) => {
 
-        const state = getThisSubState(getState)
-        const authState = getAuthSubState(getState)
+        const state = getResourceState(getState())
+        const authState = getAuthState(getState())
         const queryParams = { ...queryGenerator(state), ...extraParams, ...decamelizeKeys(params), ...methodExtraParams } // eslint-disable-line max-len
         const { executeResourceMethod } = resource[resourceMethod](queryParams, body, authState ? authState.token : '')
 

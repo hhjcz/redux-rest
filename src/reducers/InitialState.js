@@ -6,10 +6,10 @@ import Sort from '../models/Sort'
 export const InitialState = Record({
   fetching: false,
   lastFetchSignature: { fetchCollection: null, fetchOne: null },
-  ids: List(),
-  items: List(),
+  itemId: {},
+  collectionIds: List(),
+  collectionIdsStatic: List(),
   entities: Map(),
-  item: {},
   pagination: new Pagination(),
   sort: new Sort(),
   filters: Map(),
@@ -21,13 +21,13 @@ export const InitialState = Record({
  * @returns {Map<string, any>}
  */
 export function makeInitialState(fromState = {}) {
-  const { fetching, lastFetchSignature, ids, items, entities, item, pagination, sort, filters, generalParams } = fromState
+  const { fetching, lastFetchSignature, collectionIdsStatic, collectionIds, entities, itemId, pagination, sort, filters, generalParams } = fromState
   const normalizedFromState = {}
   if (fetching !== undefined) normalizedFromState.fetching = fetching
   if (lastFetchSignature) normalizedFromState.lastFetchSignature = lastFetchSignature
-  if (ids) normalizedFromState.ids = List(ids)
-  if (items) normalizedFromState.items = List(items)
-  if (item) normalizedFromState.item = item
+  if (itemId) normalizedFromState.itemId = itemId
+  if (collectionIdsStatic) normalizedFromState.collectionIdsStatic = List(collectionIdsStatic)
+  if (collectionIds) normalizedFromState.collectionIds = List(collectionIds)
   if (entities) normalizedFromState.entities = Map(entities) // .map(itemTransformer)
   if (pagination) normalizedFromState.pagination = new Pagination(pagination)
   if (sort) normalizedFromState.sort = new Sort(sort)

@@ -29,7 +29,7 @@ describe('createItemsReducer', () => {
     ]
 
     beforeEach(() => {
-      initialState = makeInitialState().items
+      initialState = makeInitialState().collectionIds
       reducer = createReducer(actionTypes, idField)
     })
 

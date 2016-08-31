@@ -11,6 +11,7 @@ describe('createRestAction', () => {
   const endpointName = 'povidky'
   const config = {
     url: `/${endpointName}/:id`,
+    getRootTree: (state) => state.resources,
     extraParams: { include: 'subresource.subsubresource', otherExtraParam: 'someValue' },
     itemTransformer: item => item,
     defaultState: { someState: { value: 666 } }

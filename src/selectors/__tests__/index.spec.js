@@ -2,41 +2,35 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai'
 import { makeInitialState } from '../../reducers/InitialState'
-import * as selectors from '../index'
+import { getResourcesRoot, getResourceWithItems } from '../index'
 
-describe('selectors', () => {
-  const resource1 = { foo: 'bar' }
-  const resource2 = { foo2: 'bar2' }
-  const resource3 = makeInitialState({ items: [1, 2, 3] })
-  const resources = {
+describe('resources selectors', () => {
+  const resource1 = { foo1: 'foo1' }
+  const resource3 = makeInitialState({
+    itemId: 2,
+    collectionIds: [1, 3],
+    entities: { 1: { foo: 'foo' }, 2: { bar: 'bar' }, 3: { baz: 'baz' } }
+  })
+  const state = {
     resource1,
-    resource2,
     resource3,
   }
-  const state = {
-    resources
-  }
 
-  it('selects resources root state', () => {
-    const rootState = selectors.getResourcesRootState(state)
-    expect(rootState).to.deep.equal(resources)
+  it('selects resource', () => {
+    const resource1State = getResourceWithItems('resource1')(state)
+    expect(resource1State.foo1).to.deep.equal('foo1')
   })
 
-  it('selects resource sub tree', () => {
-    const resource1State = selectors.getResourceState(state, 'resource1')
-    expect(resource1State).to.deep.equal(resource1)
-    const resource3State = selectors.getResourceState(state, 'resource3')
-    expect(resource3State).to.deep.equal(resource3)
-  })
+  it('selects with inserted items', () => {
+    const resource3 = getResourceWithItems('resource3')(state)
 
-  it('selects items of resource', () => {
-    const items = selectors.getItemsOf(state, 'resource3')
-    expect(items).to.deep.equal(resource3.items)
-  })
+    const expectedItem = { bar: 'bar' }
+    const expectedItems = [{ foo: 'foo' }, { baz: 'baz' }]
 
-  it('selects items of resource', () => {
-    const items = selectors.getItemsOfFP('resource3')(state)
-    expect(items).to.deep.equal(resource3.items)
+    expect(resource3.itemId).to.equal(2)
+    expect(resource3.collectionIds.toArray()).to.deep.equal([1, 3])
+    expect(resource3.item).to.deep.equal(expectedItem)
+    expect(resource3.items.toArray()).to.deep.equal(expectedItems)
   })
 
 })

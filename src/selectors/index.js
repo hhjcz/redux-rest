@@ -1,26 +1,38 @@
 /** Created by hhj on 8/30/16. */
-import { createSelector } from 'reselect'
+import Immutable from 'immutable'
+import { getItems, getItem } from './items'
 
-export const getResourcesRootState = (state) => state.resources
+export { getItem, getItems }
+export { getIdAtCursor } from './ids'
+export { getAuthTree } from './auth'
 
-const getResourceName = (x, resourceName) => resourceName
+/**
+ * @param resourceName
+ * @returns {function(resourcesRoot): *}
+ */
+export function getResourceWithItems(resourceName) {
+  return (resourcesRoot) => {
+    const resource = resourcesRoot[resourceName]
 
-export const getResourceState = createSelector(
-  [getResourcesRootState, getResourceName],
-  (rootState, resourceName) => rootState[resourceName]
-)
+    // insert items:
+    const items = getItems(resource)
+    const item = getItem(resource)
+    const resourceObj = resource.toObject ? resource.toObject() : resource
 
-export const getItemsOf = createSelector(
-  getResourceState,
-  (state) => state.items
-)
+    return { ...resourceObj, items, item }
+  }
+}
 
-export const getResourceStateFP = resourceName => createSelector(
-  getResourcesRootState,
-  (rootState) => rootState[resourceName]
-)
-
-export const getItemsOfFP = resourceName => createSelector(
-  getResourceStateFP(resourceName),
-  (state) => state.items
-)
+/**
+ * @param resourceName
+ * @returns {function(*)}
+ */
+export function getResourceTree(resourceName) {
+  return (getResourcesRoot) => {
+    return (state) => {
+      const resourcesRoot = getResourcesRoot(state)
+      const subState = resourcesRoot[resourceName]
+      return subState.toObject ? subState.toObject() : subState
+    }
+  }
+}

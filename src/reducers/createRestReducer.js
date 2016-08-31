@@ -29,9 +29,9 @@ export default function createRestReducer(endpointName, config = {}, actionTypes
   const combinedReducers = combineReducers({
     fetching: createIsFetching(actionTypes),
     lastFetchSignature: createLastFetchSignature(actionTypes),
-    ids: createIdsReducer(actionTypes),
-    items: createItemsReducer(actionTypes, idField),
-    item: createItemReducer(actionTypes, idField),
+    itemId: createItemReducer(actionTypes, idField),
+    collectionIds: createItemsReducer(actionTypes, idField),
+    collectionIdsStatic: createIdsReducer(actionTypes),
     entities: createEntitiesReducer(actionTypes, itemTransformer, idField),
     pagination: createPagination(actionTypes),
     sort: createSort(actionTypes),

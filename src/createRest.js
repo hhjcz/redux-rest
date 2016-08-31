@@ -11,8 +11,12 @@ const defaultDeps = {
   dispatch: null,
   errorHandler: null,
 }
+const defaultConfig = {
+  getRootTree: (state) => state.resources
+}
 
 export default function createRest(config = {}, depsContainer = {}) {
+  config = { ...defaultConfig, ...config }
   depsContainer = { ...defaultDeps, ...depsContainer }
   const rest = { actions: {}, reducers: {} }
 
@@ -22,26 +26,30 @@ export default function createRest(config = {}, depsContainer = {}) {
   rest.actions.auth = authActionCreators
   rest.auth = { reducer: authReducer, actions: authActionCreators }
 
-  Object.keys(config).forEach(endpointName => {
+  Object.keys(config.resources).forEach(resourceName => {
+    const resourceConfig = {
+      getRootTree: config.getRootTree,
+      ...config.resources[resourceName]
+    }
     // actions
-    const actionTypes = actionTypesFor(endpointName)
+    const actionTypes = actionTypesFor(resourceName)
     const actionCreators = actionCreatorsFor(actionTypes)
     const actions = createRestActions(
-      endpointName,
-      config[endpointName],
+      resourceName,
+      resourceConfig,
       { ...actionCreators, ...authActionCreators },
       depsContainer
     )
-    rest.actions[endpointName] = actions
-    rest[endpointName] = { actions }
+    rest.actions[resourceName] = actions
+    rest[resourceName] = { actions }
 
     // reducers
     const reducer = createRestReducer(
-      endpointName,
-      config[endpointName],
+      resourceName,
+      resourceConfig,
       actionTypes)
-    rest.reducers[endpointName] = reducer
-    rest[endpointName].reducer = reducer
+    rest.reducers[resourceName] = reducer
+    rest[resourceName].reducer = reducer
   })
 
 

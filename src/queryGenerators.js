@@ -48,13 +48,13 @@ function collection(state, extraParams = {}) {
 }
 
 function collectionByIds(state, extraParams = {}) {
-  const { ids, pagination, sort } = state
+  const { collectionIdsStatic, pagination, sort } = state
   const queryParams = { page: 1, per_page: 10000000 }
   if (sort && sort.by) queryParams.sort = `${sort.dir ? '-' : ''}${snakeCase(sort.by)}`
 
   const pageStart = (pagination.page - 1) * pagination.perPage
   const pageEnd = pageStart + pagination.perPage
-  const paginatedIds = ids.slice(pageStart, pageEnd).toArray()
+  const paginatedIds = collectionIdsStatic.slice(pageStart, pageEnd).toArray()
   const idsQuery = paginatedIds.join('|')
   queryParams['id-in'] = idsQuery
 

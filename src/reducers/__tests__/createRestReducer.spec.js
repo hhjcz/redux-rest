@@ -25,43 +25,43 @@ describe('createRestReducer', () => {
     // TODO - add assertion
   })
 
-})
 
-describe('main reducer', () => {
+  describe('main reducer', () => {
 
-  const item = { foo: 'bar' }
-  const someState = {
-    item,
-    shouldNotGoToState: 666
-  }
+    const itemId = 66
+    const someState = {
+      itemId,
+      shouldNotGoToState: 666
+    }
 
-  it('returns the initial state', () => {
-    const reducer = createRestReducer()
-    const initialState = reducer(undefined, {})
-    expect(initialState).to.deep.equal(makeInitialState())
-  })
-
-  it('accepts default state from config', () => {
-    const reducer = createRestReducer('someResource', {
-      defaultState: someState
+    it('returns the initial state', () => {
+      const reducer = createRestReducer()
+      const initialState = reducer(undefined, {})
+      expect(initialState).to.deep.equal(makeInitialState())
     })
-    const initialState = reducer(undefined, {})
 
-    expect(initialState.item).to.equal(item)
-    expect(initialState.shouldNotGoToState).to.be.undefined
-    expect(initialState).to.deep.equal(makeInitialState(someState))
-  })
+    it('accepts default state from config', () => {
+      const reducer = createRestReducer('someResource', {
+        defaultState: someState
+      })
+      const initialState = reducer(undefined, {})
 
-  it('merges initially passed state with initial state', () => {
-    const reducer = createRestReducer()
-    const initialState = reducer(someState, {})
-    expect(initialState).to.deep.equal(makeInitialState(someState))
+      expect(initialState.itemId).to.equal(itemId)
+      expect(initialState.shouldNotGoToState).to.be.undefined
+      expect(initialState).to.deep.equal(makeInitialState(someState))
+    })
 
-    // passed state has priority
-    const reducer2 = createRestReducer('someResource', { defaultState: { item: { bar: 'baz' } } })
-    const initialState2 = reducer2(someState, {})
-    expect(initialState).to.deep.equal(makeInitialState(someState))
+    it('merges initially passed state with initial state', () => {
+      const reducer = createRestReducer()
+      const initialState = reducer(someState, {})
+      expect(initialState).to.deep.equal(makeInitialState(someState))
+
+      // passed state has priority
+      const reducer2 = createRestReducer('someResource', { defaultState: { itemId: 666 } })
+      const initialState2 = reducer2(someState, {})
+      expect(initialState).to.deep.equal(makeInitialState(someState))
+    })
+
   })
 
 })
-

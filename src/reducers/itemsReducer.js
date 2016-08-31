@@ -22,7 +22,6 @@ export default function createItemsReducer(actionTypes, idField = 'id') {
 
       case actionTypes.fetchCollectionSuccess:
       case actionTypes.fetchCollectionByIdsSuccess:
-      case actionTypes.fetchIdsSuccess:
         return itemsIds(items)
 
       case actionTypes.fetchCollectionError:

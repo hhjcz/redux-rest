@@ -23,6 +23,8 @@ const defaultConfig = {
  * @returns {Object} rest helper {actions: {}, reducer: function}
  */
 export default function createRest(config = {}, depsContainer = {}) {
+  const start = typeof performance === 'object' ? performance.now() : null
+
   config = { ...defaultConfig, ...config }
   depsContainer = { ...defaultDeps, ...depsContainer }
   const rest = { actions: {}, reducer: null }
@@ -68,6 +70,11 @@ export default function createRest(config = {}, depsContainer = {}) {
   rest.use = (key, value) => {
     depsContainer[key] = value
     return rest
+  }
+
+  if (typeof performance === 'object') {
+    const end = performance.now()
+    console.log(`%c Rest creation took ${(end - start).toFixed(2)} milliseconds.`, 'background: #bada55; color: #222');
   }
 
   return rest

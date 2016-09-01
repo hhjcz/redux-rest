@@ -1,16 +1,15 @@
 /** Created by hhj on 8/30/16. */
-import Immutable from 'immutable'
-import { getItems, getItem } from './items'
+import { selectItems, selectItem } from './items'
 
-export { getItem, getItems }
-export { getIdAtCursor } from './ids'
-export { getAuthTree } from './auth'
+export { selectItem, selectItems }
+export { selectIdAtCursor } from './ids'
+export { selectAuthTree } from './auth'
 
 /**
  * @param getResourcesRoot
  * @returns {function(*): function(*=)}
  */
-export function getResourceTree(getResourcesRoot) {
+export function selectResourceTree(getResourcesRoot) {
   return (resourceName) =>
     (state) => {
       const resourcesRoot = getResourcesRoot(state)
@@ -20,17 +19,19 @@ export function getResourceTree(getResourcesRoot) {
 }
 
 /**
+ * Returns denormalized resource state - calculates items etc.
+ *
  * @param getResourcesRoot
  * @returns {function(*=)}
  */
-export function getResourceWithItems(getResourcesRoot) {
+export function selectResource(getResourcesRoot) {
   return (resourceName) =>
     (state) => {
-      const resourceObj = getResourceTree(getResourcesRoot)(resourceName)(state)
+      const resourceObj = selectResourceTree(getResourcesRoot)(resourceName)(state)
 
       // insert items:
-      const items = getItems(resourceObj)
-      const item = getItem(resourceObj)
+      const items = selectItems(resourceObj)
+      const item = selectItem(resourceObj)
 
       return { ...resourceObj, items, item }
     }

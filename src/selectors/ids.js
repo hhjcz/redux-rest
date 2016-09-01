@@ -5,7 +5,7 @@ import { List } from 'immutable'
  * @param resourceState
  * @returns {Array|*|List<T>|List<any>}
  */
-export function getItemId(resourceState) {
+export function selectItemId(resourceState) {
   return resourceState ? resourceState.itemId || null : null
 }
 
@@ -13,7 +13,7 @@ export function getItemId(resourceState) {
  * @param resourceState
  * @returns {Array|*|List<T>|List<any>}
  */
-export function getCollectionIds(resourceState) {
+export function selectCollectionIds(resourceState) {
   return resourceState ? resourceState.collectionIds || List() : List()
 }
 
@@ -21,7 +21,7 @@ export function getCollectionIds(resourceState) {
  * @param resourceState
  * @returns {Array}
  */
-export function getCollectionIdsStatic(resourceState) {
+export function selectCollectionIdsStatic(resourceState) {
   return resourceState.collectionIdsStatic
 }
 
@@ -29,6 +29,6 @@ export function getCollectionIdsStatic(resourceState) {
  * @param resourceState
  * @returns {V}
  */
-export function getIdAtCursor(resourceState) {
-  return getCollectionIdsStatic(resourceState).get(resourceState.pagination.cursorAt - 1)
+export function selectIdAtCursor(resourceState) {
+  return selectCollectionIdsStatic(resourceState).get(resourceState.pagination.cursorAt - 1)
 }

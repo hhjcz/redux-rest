@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai'
 import { makeInitialState } from '../../reducers/InitialState'
-import { getItemId, getCollectionIds, getCollectionIdsStatic, getIdAtCursor } from '../ids'
+import { selectItemId, selectCollectionIds, selectCollectionIdsStatic, selectIdAtCursor } from '../ids'
 
 describe('ids selectors', () => {
 
@@ -14,23 +14,23 @@ describe('ids selectors', () => {
   })
 
   it('selects item id', () => {
-    const ids = getItemId(resourceState)
+    const ids = selectItemId(resourceState)
     expect(ids).to.deep.equal(66)
   })
 
   it('selects collection ids', () => {
-    const ids = getCollectionIds(resourceState)
+    const ids = selectCollectionIds(resourceState)
     expect(ids.toArray()).to.deep.equal([1, 2, 3, 4])
   })
 
   it('selects static collection ids', () => {
-    const ids = getCollectionIdsStatic(resourceState)
+    const ids = selectCollectionIdsStatic(resourceState)
     expect(ids.toArray()).to.deep.equal([5, 6, 7, 8])
   })
 
 
   it('should get id of item at cursor', () => {
-    const id = getIdAtCursor(resourceState)
+    const id = selectIdAtCursor(resourceState)
     expect(id).to.equal(7)
   })
 })

@@ -3,11 +3,11 @@
 import { expect } from 'chai'
 import { List } from 'immutable'
 import { makeInitialState } from '../../reducers/InitialState'
-import { getItems, getItem } from '../items'
+import { selectItems, selectItem } from '../items'
 
 describe('items selectors', () => {
 
-  describe('getItems', () => {
+  describe('selectItems', () => {
     let resourceState
     beforeEach(() => {
       resourceState = makeInitialState({
@@ -18,20 +18,20 @@ describe('items selectors', () => {
     })
 
     it('handles empty resource state', () => {
-      let items = getItems()
+      let items = selectItems()
       expect(items).to.equal(List())
-      items = getItems(null)
+      items = selectItems(null)
       expect(items).to.equal(List())
     })
 
     it('selects items from resource', () => {
-      const items = getItems(resourceState)
+      const items = selectItems(resourceState)
       expect(items).to.be.instanceOf(List)
       expect(items.toArray()).to.deep.equal([{ id: 66, name: 'name66' }, { id: 77, name: 'name77' }])
     })
   })
 
-  describe('getItem', () => {
+  describe('selectItem', () => {
     let resourceState
     beforeEach(() => {
       resourceState = makeInitialState({
@@ -42,12 +42,12 @@ describe('items selectors', () => {
     })
 
     it('handles empty resource', () => {
-      const item = getItem()
+      const item = selectItem()
       expect(item).to.deep.equal({})
     })
 
     it('selects items from resource', () => {
-      const item = getItem(resourceState)
+      const item = selectItem(resourceState)
       expect(item).to.deep.equal({ id: 66, name: 'name66' })
     })
   })

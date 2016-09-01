@@ -1,12 +1,12 @@
 /** Created by hhj on 8/30/16. */
-import { List, Map } from 'immutable'
-import { getItemId, getCollectionIds } from './ids'
+import { Map } from 'immutable'
+import { selectItemId, selectCollectionIds } from './ids'
 
-function getEntities(resourceState) {
+function selectEntities(resourceState) {
   return resourceState ? resourceState.entities || Map() : Map()
 }
 
-function getEntity(id) {
+function selectEntity(id) {
   return (entities) => entities.get(`${id}`)
 }
 
@@ -14,25 +14,25 @@ function getEntity(id) {
  * @param resourceState
  * @returns {Array|Iterable<K, *>}
  */
-export function getItems(resourceState) {
+export function selectItems(resourceState) {
   if (resourceState && resourceState.items) return resourceState.items
-  const entities = getEntities(resourceState)
-  const items = getCollectionIds(resourceState)
-    .filter(id => getEntity(id)(entities) !== undefined)
-    .map(id => getEntity(id)(entities))
+  const entities = selectEntities(resourceState)
+  const items = selectCollectionIds(resourceState)
+    .filter(id => selectEntity(id)(entities) !== undefined)
+    .map(id => selectEntity(id)(entities))
 
   return items
 }
 
 /**
- * TODO - rename to getResult or fetchedItem - distinguish different getItem situations
+ * TODO - rename to getResult or fetchedItem - distinguish different selectItem situations
  *
  * @param resourceName
  * @returns {function(resourcesRoot)}
  */
-export function getItem(resourceState, defaultValue = {}) {
+export function selectItem(resourceState, defaultValue = {}) {
   if (resourceState && resourceState.item) return resourceState.item
-  const entities = getEntities(resourceState)
+  const entities = selectEntities(resourceState)
 
-  return getEntity(getItemId(resourceState))(entities) || defaultValue
+  return selectEntity(selectItemId(resourceState))(entities) || defaultValue
 }

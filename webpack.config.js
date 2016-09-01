@@ -10,7 +10,7 @@ var config = {
     ]
   },
   output: {
-    library: '@hhjcz/redux-rest',
+    library: 'ReduxRest',
     libraryTarget: 'umd'
   },
   plugins: [

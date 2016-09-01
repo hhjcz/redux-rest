@@ -4,14 +4,14 @@ var webpack = require('webpack')
 
 var env = process.env.NODE_ENV
 var config = {
+  output: {
+    library: 'ReduxRest',
+    libraryTarget: 'umd'
+  },
   module: {
     loaders: [
       { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/ }
     ]
-  },
-  output: {
-    library: 'ReduxRest',
-    libraryTarget: 'umd'
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),

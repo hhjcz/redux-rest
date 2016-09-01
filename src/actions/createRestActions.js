@@ -21,7 +21,7 @@ export default function createRestActions(resourceName, config, actionCreators, 
    * @param methodExtraParams
    * @returns {function({}=)}
    */
-  const createAsyncAction = (actionName, resourceMethod = null, methodExtraParams = {}) => {
+  function createAsyncAction(actionName, resourceMethod = null, methodExtraParams = {}) {
     if (!resourceMethod) resourceMethod = actionName
 
     const subActionCreators = {
@@ -32,9 +32,9 @@ export default function createRestActions(resourceName, config, actionCreators, 
     const queryGenerator = queryGenerators[actionName] || (() => ({}))
 
     /* eslint-disable arrow-body-style */
-    return ({ params, body } = {}) => {
+    return function restAsyncActionCreator({ params, body } = {}) {
 
-      return depsContainer.dispatch(({ dispatch, getState }) => {
+      return depsContainer.dispatch(function restAsyncAction({ dispatch, getState }) {
 
         const state = getThisState(getState())
         const authState = getAuthState(getState())

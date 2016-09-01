@@ -3,6 +3,8 @@ import createRest from './createRest'
 
 export default createRest
 export createRest from './createRest'
+
+export { getResourceWithItems, getItems, getItem, getIdAtCursor } from './selectors'
 export createFetch from './resource/createFetch'
 export const collectionTypes = { static: 'static', dynamic: 'dynamic' }
 

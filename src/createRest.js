@@ -45,6 +45,7 @@ export default function createRest(config = {}, depsContainer = {}) {
 
     // reducers
     const reducer = createRestReducer(
+      resourceName,
       resourceConfig,
       actionTypes)
     rest.reducers[resourceName] = reducer

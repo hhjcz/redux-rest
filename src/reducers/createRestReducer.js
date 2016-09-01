@@ -15,11 +15,12 @@ import createFilters from './filtersReducer'
 import createGeneralParams from './generalParamsReducer'
 
 /**
+ * @param resourceName
  * @param config
  * @param {ActionTypes} actionTypes
  * @returns {reducer}
  */
-export default function createRestReducer(config = {}, actionTypes = {}) {
+export default function createRestReducer(resourceName, config = {}, actionTypes = {}) {
   const itemTransformer = config.itemTransformer || (item => item)
   const idField = config.idField || 'id'
 
@@ -38,11 +39,17 @@ export default function createRestReducer(config = {}, actionTypes = {}) {
     generalParams: createGeneralParams(actionTypes)
   })
 
+  // performance boost? - skip actions that don't belong to this reducer
+  function shouldWeReduce(action) {
+    // TODO - better recognition of what is ours - action can have resourceName property...
+    if (action.type && action.type.toLowerCase().indexOf(resourceName.toLowerCase()) === -1) return false
+    return true
+  }
+
 
   return function restReducer(state, action) {
     if (!(state instanceof InitialState)) return makeInitialState({ ...defaultState, ...state })
-    // if (!action.type) return state
-    // if (action.type.toLowerCase().indexOf(endpointName.toLowerCase()) === -1) return state
+    // if (!shouldWeReduce(action)) return state
 
     // combineReducers works with plain object state only
     const nextState = combinedReducers(state.toObject(), action)

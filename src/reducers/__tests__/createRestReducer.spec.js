@@ -12,7 +12,7 @@ describe('createRestReducer', () => {
 
   it('passes down actionTypes', () => {
     const actionTypes = { someAction: 'someAction' }
-    const reducer = createRestReducer({}, actionTypes)
+    const reducer = createRestReducer('someResource', {}, actionTypes)
     // TODO - add assertion
   })
 
@@ -21,7 +21,7 @@ describe('createRestReducer', () => {
       itemTransformer: x => x,
       idField: 'someIdField'
     }
-    const reducer = createRestReducer(config)
+    const reducer = createRestReducer('someResource', config)
     // TODO - add assertion
   })
 
@@ -41,7 +41,7 @@ describe('createRestReducer', () => {
     })
 
     it('accepts default state from config', () => {
-      const reducer = createRestReducer({
+      const reducer = createRestReducer('someResource', {
         defaultState: someState
       })
       const initialState = reducer(undefined, {})
@@ -57,7 +57,7 @@ describe('createRestReducer', () => {
       expect(initialState).to.deep.equal(makeInitialState(someState))
 
       // passed state has priority
-      const reducer2 = createRestReducer({ defaultState: { itemId: 666 } })
+      const reducer2 = createRestReducer('someResource', { defaultState: { itemId: 666 } })
       const initialState2 = reducer2(someState, {})
       expect(initialState).to.deep.equal(makeInitialState(someState))
     })

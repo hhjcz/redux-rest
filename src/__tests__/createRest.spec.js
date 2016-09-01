@@ -33,20 +33,20 @@ describe('createRest', () => {
     }
     const depsContainer = { fetch, dispatch }
     rest = createRest(config, depsContainer)
-    reducer = rest.reducers.someEndpoint
+    reducer = rest.reducer
   })
 
   it('should create basic object', () => {
     expect(typeof rest).to.equal('object')
     expect(typeof rest.actions).to.equal('object')
-    expect(typeof rest.reducers).to.equal('object')
+    expect(typeof rest.reducer).to.equal('function')
     expect(typeof rest.use).to.equal('function')
   })
 
   it('should create actions', () => {
-    const { actions, reducers } = rest
+    const { actions, reducer } = rest
     expect(typeof actions.someEndpoint.fetchCollection).to.equal('function')
-    expect(typeof reducers.someEndpoint).to.equal('function')
+    expect(typeof reducer).to.equal('function')
   })
 
   it('should use provided resource', () => {

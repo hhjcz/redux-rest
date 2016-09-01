@@ -1,4 +1,5 @@
 /** Created by hhj on 1/29/16. */
+import { combineReducers } from 'redux'
 import actionTypesFor from './actions/actionTypesFor'
 import actionCreatorsFor from './actions/actionCreatorsFor'
 import createRestActions from './actions/createRestActions'
@@ -16,17 +17,24 @@ const defaultConfig = {
   selectResourcesRoot: (state) => state.resources
 }
 
+/**
+ * @param {Object} config
+ * @param {Object} depsContainer
+ * @returns {Object} rest helper {actions: {}, reducer: function}
+ */
 export default function createRest(config = {}, depsContainer = {}) {
   config = { ...defaultConfig, ...config }
   depsContainer = { ...defaultDeps, ...depsContainer }
-  const rest = { actions: {}, reducers: {} }
+  const rest = { actions: {}, reducer: null }
+  const reducers = {}
 
-  // authentication reducers and actions:
+  // authentication reducers and actions
   const authActionCreators = createAuthActions(depsContainer)
-  rest.reducers.auth = authReducer
   rest.actions.auth = authActionCreators
-  rest.auth = { reducer: authReducer, actions: authActionCreators }
+  rest.auth = { actions: authActionCreators }
+  reducers.auth = authReducer
 
+  // each resource
   Object.keys(config.resources).forEach(resourceName => {
     const resourceConfig = {
       selectResourcesRoot: config.selectResourcesRoot,
@@ -44,20 +52,19 @@ export default function createRest(config = {}, depsContainer = {}) {
     rest.actions[resourceName] = actions
     rest[resourceName] = { actions }
 
-    // reducers
-    const reducer = createRestReducer(
+    // reducer
+    reducers[resourceName] = createRestReducer(
       resourceName,
       resourceConfig,
       actionTypes)
-    rest.reducers[resourceName] = reducer
-    rest[resourceName].reducer = reducer
 
-    // utils
-    rest.selectResourcesRoot = config.selectResourcesRoot
-    rest.selectResource = selectResourceFn(config.selectResourcesRoot)
   })
 
+  rest.reducer = combineReducers({ ...reducers })
 
+  // utils
+  rest.selectResourcesRoot = config.selectResourcesRoot
+  rest.selectResource = selectResourceFn(config.selectResourcesRoot)
   rest.use = (key, value) => {
     depsContainer[key] = value
     return rest

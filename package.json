@@ -14,7 +14,7 @@
     "build:watch": "npm run build -- --watch",
     "build:umd": "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack src/index.js dist/redux-rest.js",
     "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack src/index.js dist/redux-rest.min.js",
-    "prepublish": "npm run clean && npm run build && npm run build:umd:min",
+    "prepublish": "npm run clean && npm run build && npm run build:umd && npm run build:umd:min",
     "clean": "rm -fr lib/ || true",
     "eslint": "eslint --ext=js --ext=jsx src || true",
     "test": "mocha --compilers js:babel-register --require ./test_helper.js --reporter spec --recursive --watch-extensions jsx 'src/**/*.spec.js'",
@@ -41,11 +41,11 @@
   "homepage": "https://github.com/hhjcz/redux-rest#readme",
   "dependencies": {
     "humps": "^1.1.0",
-    "immutable": "^3.8.1",
-    "isomorphic-fetch": "^2.2.1",
+    "immutable": "^3.8.0",
+    "isomorphic-fetch": "^2.2.0",
     "lodash": "^4.15.0",
-    "query-string": "^4.2.3",
-    "redux": "^3.5.2"
+    "query-string": "^4.2.0",
+    "redux": "^3.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",

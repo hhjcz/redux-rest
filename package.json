@@ -15,6 +15,8 @@
     "build:umd": "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack src/index.js dist/redux-rest.js",
     "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack src/index.js dist/redux-rest.min.js",
     "prepublish": "npm run clean && npm run build && npm run build:umd && npm run build:umd:min",
+    "build:dev": "babel src --copy-files --ignore spec.js,spec.jsx --watch --out-dir ../dohlestr-frontend/my_libs/redux-rest",
+    "build:dev2": "babel src --copy-files --ignore spec.js,spec.jsx --watch --out-dir ../dohlestr-frontend/node_modules/@hhjcz/redux-rest/lib/",
     "clean": "rm -fr lib/ || true",
     "eslint": "eslint --ext=js --ext=jsx src || true",
     "test": "mocha --compilers js:babel-register --require ./test_helper.js --reporter spec --recursive --watch-extensions jsx 'src/**/*.spec.js'",

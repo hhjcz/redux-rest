@@ -1,13 +1,13 @@
 /** Created by hhj on 1/29/16. */
 import { decamelizeKeys } from 'humps'
 import createResource from '../resource/createResource'
-import { selectResourceTree, selectAuthTree } from '../selectors'
+import { selectResourceTreeFn, selectAuthTreeFn } from '../selectors'
 import queryGenerators from '../queryGenerators'
 import Filter from '../models/Filter'
 
 export default function createRestActions(resourceName, config, actionCreators, depsContainer) {
-  const getThisState = selectResourceTree(config.getRootTree)(resourceName)
-  const getAuthState = selectAuthTree(config.getRootTree)
+  const getThisState = selectResourceTreeFn(config.selectResourcesRoot)(resourceName)
+  const getAuthState = selectAuthTreeFn(config.selectResourcesRoot)
 
   const resource = createResource(resourceName, config, depsContainer)
   const extraParams = decamelizeKeys(config.extraParams)

@@ -21,7 +21,7 @@ describe('index', () => {
   })
 
   it('exports selectors', () => {
-    expect(typeof selectors.selectResource).to.equal('function')
+    expect(typeof selectors.selectResourceFn).to.equal('function')
     expect(typeof selectors.selectItem).to.equal('function')
     expect(typeof selectors.selectItems).to.equal('function')
     expect(typeof selectors.selectIdAtCursor).to.equal('function')

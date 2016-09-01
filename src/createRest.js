@@ -5,6 +5,7 @@ import createRestActions from './actions/createRestActions'
 import createRestReducer from './reducers/createRestReducer'
 import createAuthActions from './actions/authActions'
 import authReducer from './reducers/authReducer'
+import { selectResourceFn } from './selectors'
 
 const defaultDeps = {
   fetch: () => ({}),
@@ -12,7 +13,7 @@ const defaultDeps = {
   errorHandler: null,
 }
 const defaultConfig = {
-  getRootTree: (state) => state.resources
+  selectResourcesRoot: (state) => state.resources
 }
 
 export default function createRest(config = {}, depsContainer = {}) {
@@ -28,7 +29,7 @@ export default function createRest(config = {}, depsContainer = {}) {
 
   Object.keys(config.resources).forEach(resourceName => {
     const resourceConfig = {
-      getRootTree: config.getRootTree,
+      selectResourcesRoot: config.selectResourcesRoot,
       ...config.resources[resourceName]
     }
     // actions
@@ -52,7 +53,8 @@ export default function createRest(config = {}, depsContainer = {}) {
     rest[resourceName].reducer = reducer
 
     // utils
-    rest.getRootTree = config.getRootTree
+    rest.selectResourcesRoot = config.selectResourcesRoot
+    rest.selectResource = selectResourceFn(config.selectResourcesRoot)
   })
 
 

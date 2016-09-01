@@ -1,15 +1,21 @@
 /** Created by hhj on 1/29/16. */
 import createRest from './createRest'
+import * as selectors from './selectors'
+import createFetch from './resource/createFetch'
+import Pagination from './models/Pagination'
+import Sort from './models/Sort'
+import Filter from './models/Filter'
 
 export default createRest
-export createRest from './createRest'
+const collectionTypes = { static: 'static', dynamic: 'dynamic' }
 
-export { selectResource, selectItems, selectItem, selectIdAtCursor } from './selectors'
-export createFetch from './resource/createFetch'
-export const collectionTypes = { static: 'static', dynamic: 'dynamic' }
-
-export Pagination from './models/Pagination'
-export Sort from './models/Sort'
-export Filter from './models/Filter'
-export createFetch from './resource/createFetch'
+export {
+  createRest,
+  selectors,
+  collectionTypes,
+  Pagination,
+  Sort,
+  Filter,
+  createFetch,
+}
 

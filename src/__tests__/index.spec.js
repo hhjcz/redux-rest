@@ -2,10 +2,7 @@
 import { expect } from 'chai'
 import createRest, {
   createFetch,
-  selectResource,
-  selectItem,
-  selectItems,
-  selectIdAtCursor,
+  selectors,
   Pagination,
   Sort,
   Filter,
@@ -24,10 +21,10 @@ describe('index', () => {
   })
 
   it('exports selectors', () => {
-    expect(typeof selectResource).to.equal('function')
-    expect(typeof selectItem).to.equal('function')
-    expect(typeof selectItems).to.equal('function')
-    expect(typeof selectIdAtCursor).to.equal('function')
+    expect(typeof selectors.selectResource).to.equal('function')
+    expect(typeof selectors.selectItem).to.equal('function')
+    expect(typeof selectors.selectItems).to.equal('function')
+    expect(typeof selectors.selectIdAtCursor).to.equal('function')
   })
 
   it('exports models', () => {

@@ -1,14 +1,13 @@
 /** Created by hhj on 8/30/16. */
 import { Map } from 'immutable'
+import R from 'ramda'
 import { selectItemId, selectCollectionIds } from './ids'
 
-function selectEntities(resourceState) {
-  return resourceState ? resourceState.entities || Map() : Map()
-}
+const selectEntities = R.curry((resourceState, id) => {
+  const entities = resourceState ? resourceState.entities || Map() : Map()
 
-function selectEntity(id) {
-  return (entities) => entities.get(`${id}`)
-}
+  return entities.get(`${id}`)
+})
 
 /**
  * @param resourceState
@@ -16,12 +15,10 @@ function selectEntity(id) {
  */
 export function selectItems(resourceState) {
   if (resourceState && resourceState.items) return resourceState.items
-  const entities = selectEntities(resourceState)
-  const items = selectCollectionIds(resourceState)
-    .filter(id => selectEntity(id)(entities) !== undefined)
-    .map(id => selectEntity(id)(entities))
-
-  return items
+  const selectEntity = selectEntities(resourceState)
+  return selectCollectionIds(resourceState)
+    .filter(id => selectEntity(id) !== undefined)
+    .map(id => selectEntity(id))
 }
 
 /**
@@ -32,7 +29,6 @@ export function selectItems(resourceState) {
  */
 export function selectItem(resourceState, defaultValue = {}) {
   if (resourceState && resourceState.item) return resourceState.item
-  const entities = selectEntities(resourceState)
-
-  return selectEntity(selectItemId(resourceState))(entities) || defaultValue
+  const id = selectItemId(resourceState)
+  return selectEntities(resourceState, id) || defaultValue
 }

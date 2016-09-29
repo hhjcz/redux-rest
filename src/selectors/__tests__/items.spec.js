@@ -46,9 +46,14 @@ describe('items selectors', () => {
       expect(item).to.deep.equal({})
     })
 
-    it('selects items from resource', () => {
+    it('selects item from resource', () => {
       const item = selectItem(resourceState)
       expect(item).to.deep.equal({ id: 66, name: 'name66' })
+    })
+
+    it('selects item by id', () => {
+      const item = selectItem(resourceState, {}, 77)
+      expect(item).to.deep.equal({ id: 77, name: 'name77' })
     })
   })
 

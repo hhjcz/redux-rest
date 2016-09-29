@@ -27,12 +27,16 @@ export function selectItems(resourceState) {
 /**
  * TODO - rename to getResult or fetchedItem - distinguish different selectItem situations
  *
- * @param resourceName
+ * @param resourceState
+ * @param defaultValue
+ * @param id
  * @returns {function(resourcesRoot)}
  */
-export function selectItem(resourceState, defaultValue = {}) {
-  if (resourceState && resourceState.item) return resourceState.item
+export function selectItem(resourceState, defaultValue = {}, id = null) {
+  if (resourceState && resourceState.item && id === null) return resourceState.item
   const entities = selectEntities(resourceState)
+  const _id = id || selectItemId(resourceState)
+  console.log('Selecting ID:', _id)
 
-  return selectEntity(selectItemId(resourceState))(entities) || defaultValue
+  return selectEntity(_id)(entities) || defaultValue
 }

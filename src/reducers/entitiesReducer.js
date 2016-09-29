@@ -20,13 +20,14 @@ export default function createEntitiesReducer(actionTypes, itemTransformer = x =
 
   return function entitiesReducer(state = Map(), action) {
 
-    const items = action.data
-
     switch (action.type) {
+
+      case actionTypes.fetchOneSuccess:
+        return mergeEntities(state, [action.data])
 
       case actionTypes.fetchCollectionSuccess:
       case actionTypes.fetchCollectionByIdsSuccess:
-        return mergeEntities(state, items)
+        return mergeEntities(state, action.data)
 
       case actionTypes.clearEntities:
         return Map()

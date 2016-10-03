@@ -36,7 +36,6 @@ export function selectItem(resourceState, defaultValue = {}, id = null) {
   if (resourceState && resourceState.item && id === null) return resourceState.item
   const entities = selectEntities(resourceState)
   const _id = id || selectItemId(resourceState)
-  console.log('Selecting ID:', _id)
 
   return selectEntity(_id)(entities) || defaultValue
 }

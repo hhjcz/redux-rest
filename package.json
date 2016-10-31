@@ -45,7 +45,7 @@
     "humps": "^1.1.0",
     "immutable": "^3.8.0",
     "isomorphic-fetch": "^2.2.0",
-    "lodash": "^4.15.0",
+    "lodash": "^4.16.5",
     "query-string": "^4.2.0",
     "redux": "^3.5.0"
   },
